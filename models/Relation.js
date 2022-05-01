@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
   user: {
-      type: 
+    type: Schema.Types.ObjectId,
   },
   name: {
     type: String,
@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   category: {
-    type: Array,
+    type: [Number],
     required: true,
   },
   company: {
