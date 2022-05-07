@@ -1,0 +1,22 @@
+.Register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
+
+  .formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+
+    .registerInput {
+      border-radius: 4px;
+    }
+
+    .registerButton {
+      border-radius: 4px;
+    }
+  }
+}
