@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const RelationSchema = new mongoose.Schema({
   user: {
@@ -41,7 +42,7 @@ const RelationSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  date: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },
