@@ -5,13 +5,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server:run": "nodemon server.js"
+    "start:server": "nodemon server.js",
+    "start:client": "cd client && yarn start",
+    "start:app": "concurrently \"yarn start:server\" \"yarn start:client\""
+    
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "concurrently": "^7.1.0",
     "config": "^3.3.7",
     "cors": "^2.8.5",
     "express": "^4.18.1",

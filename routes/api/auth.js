@@ -14,7 +14,7 @@ const User = require('../../models/User');
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
+    res.json({ user: user });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -42,7 +42,7 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+          .json({ errors: [{ param: 'email', msg: 'Invalid Credentials' }] });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -50,13 +50,13 @@ router.post(
       if (!isMatch) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+          .json({ errors: [{ param: 'password', msg: 'Invalid Credentials' }] });
       }
 
       const payload = {
         user: {
-          id: user.id
-        }
+          id: user.id,
+        },
       };
 
       jwt.sign(

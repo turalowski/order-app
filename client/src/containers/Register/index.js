@@ -3,6 +3,7 @@ import { Form } from 'antd';
 import { CustomInput, CustomButton } from '../../components';
 import { useAuth } from '../../hooks';
 import styles from './style.module.scss';
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
   const [form] = Form.useForm();
@@ -73,7 +74,9 @@ export const Register = () => {
           >
             Register
           </CustomButton>
-          <CustomButton block>Login</CustomButton>
+          <Link to="/login">
+            <CustomButton block>Login</CustomButton>
+          </Link>
         </Form>
       </div>
     </div>

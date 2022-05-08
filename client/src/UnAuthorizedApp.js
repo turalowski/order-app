@@ -6,7 +6,7 @@ const UnAuthorizedApp = () => {
     <Routes>
       <Route exact path="login" element={<Login />} />
       <Route exact path="register" element={<Register />} />
-      <Route path="*" element={<Navigate to="/register" />} />
+      <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );
 };
