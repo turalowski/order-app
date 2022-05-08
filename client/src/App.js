@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UnAuthorizedApp from './UnAuthorizedApp';
 import AuthorizedApp from './AuthorizedApp';
 import { useAuth } from './hooks';
+import { AuthContext } from './context';
 import './App.css';
 import { Spin } from 'antd';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(undefined);
-  const [user, setUser] = useState(undefined);
+  const { isAuthenticated, setIsAuthenticated, setUser } =
+    useContext(AuthContext);
   const { validateToken } = useAuth();
 
   const checkToken = () => {

@@ -1,0 +1,22 @@
+.MainHeader {
+  background-color: #55ab80 !important;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    .user {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../context';
+import { Layout, Avatar } from 'antd';
+import styles from './styles.module.scss';
 
 export const MainHeader = () => {
+  const { user } = useContext(AuthContext);
   return (
-    <div
-      style={{
-        height: '5vh',
-        color: 'white',
-        backgroundColor: '#55ab80',
-        paddingLeft: '3vw',
-        display: 'flex',
-        alignItems: 'center'
-      }}
-    >
-      <span>{new Date().toDateString()}</span>
-    </div>
+    <Layout.Header className={styles.MainHeader}>
+      <div>{new Date().toDateString()}</div>
+      <div className={styles.userInfo}>
+        <div className={styles.user}>
+          <span style={{fontSize: '18px', marginBottom: '5px'}}>{user?.fullName}</span>
+          <span>{user?.companyName}</span>
+        </div>
+        <Avatar src={user?.avatar} />
+      </div>
+    </Layout.Header>
   );
 };

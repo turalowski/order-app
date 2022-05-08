@@ -37,7 +37,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .err({ errors: [{ msg: 'User already exists' }] });
+          .json({ errors: [{ msg: 'User already exists' }] });
       }
 
       const avatar = normalize(

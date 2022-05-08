@@ -1,0 +1,203 @@
+.table {
+    table {
+      border-spacing: 0;
+      border-collapse: separate;
+      border: none !important;
+    }
+  
+    tbody {
+      tr {
+        td {
+          // &:last-child {
+          //   padding-right: 4px !important;
+          // }
+        }
+      }
+    }
+    thead {
+      font-size: 12px;
+    }
+    th {
+      padding: 12px 20px 10px !important;
+      border-right: none !important;
+      &:last-child {
+        text-align: right;
+      }
+  
+      &:nth-child(8) {
+        position: relative;
+        text-align: right;
+      }
+      &:nth-child(9) {
+        position: relative;
+        text-align: center;
+      }
+      &:nth-child(10) {
+        position: relative;
+        text-align: right;
+      }
+    }
+    :global {
+      .ant-table-body {
+        overflow-x: auto !important;
+      }
+      .ant-table-row-selected td {
+        background-color: #fff !important;
+      }
+      .ant-table-middle td:first-child {
+        padding-left: 16px !important;
+      }
+  
+      // .ant-table-middle td:last-child {
+      //   padding-right: 16px !important;
+      // }
+    }
+  }
+  
+  .row {
+    background: #fff;
+    font-size: 13px;
+    &:hover {
+      //cursor: pointer;
+      background: rgba(85, 171, 128, 0.180392) !important;
+      td {
+        background: rgba(85, 171, 128, 0.180392) !important;
+      }
+    }
+    td {
+      // border-top: 2px solid #f6f6f6 !important;
+      // border-bottom: 2px solid #f6f6f6 !important;
+      background-color: #fff;
+      font-size: 13px;
+      font-weight: 400;
+      color: #646464;
+      max-width: 100px;
+      // overflow: hidden;
+      text-overflow: ellipsis;
+      border-right: none !important;
+  
+      &:last-child {
+        position: relative;
+        // text-align: right;
+        // padding-right: 4px !important;
+      }
+      &:nth-child(8) {
+        position: relative;
+        text-align: right;
+      }
+      &:nth-child(9) {
+        position: relative;
+        text-align: center;
+      }
+      &:nth-child(10) {
+        position: relative;
+        text-align: right;
+      }
+    }
+  }
+  
+  .selectedRow {
+    td {
+      background: rgba(85, 171, 128, 0.180392) !important;
+    }
+  }
+  
+  .footer {
+    border-radius: 0 0 4px 4px;
+    background: #484848;
+    padding: 16px 40px;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  div[class^='ant-table-header'] {
+    background: none !important;
+  }
+  
+  .customWhiteTable {
+    &:hover {
+      //cursor: pointer;
+      background: #fff !important;
+  
+      td {
+        background: #fff !important;
+      }
+    }
+    table {
+      border-spacing: 0;
+      border-collapse: separate;
+      border: none !important;
+    }
+  
+    tbody {
+      tr {
+        &:hover {
+          background-color: transparent !important;
+        }
+        td {
+          //padding-top: 20px!important;
+          //padding-bottom: 20px!important;
+          padding: 12px 16px 10px !important;
+          // &:last-child {
+          //   padding-right: 4px !important;
+          // }
+        }
+      }
+    }
+    thead {
+      font-size: 12px;
+  
+      tr {
+        th {
+          background-color: #fff;
+          color: #2e2e2e;
+        }
+      }
+    }
+    th {
+      padding: 12px 16px 10px !important;
+      border-right: none !important;
+      // &:last-child {
+      //   text-align: right;
+      // }
+  
+      // &:nth-child(8) {
+      //   position: relative;
+      //   text-align: right;
+      // }
+    }
+    //td{
+    :global {
+      .ant-table-body {
+        overflow-x: auto !important;
+      }
+      .ant-table-row-selected td {
+        background-color: #fff !important;
+      }
+    }
+  }
+  
+  .summaryRow,
+  .summaryRow:hover {
+    background-color: #484848 !important;
+    color: white;
+    td {
+      color: white;
+      font-weight: 700;
+      background-color: #484848 !important;
+    }
+  }
+  .deleted {
+    filter: grayscale(1) opacity(0.6);
+    border-color: rgba(214, 214, 214, 0.38);
+    font-size: 13px;
+  
+    td &:hover {
+      background: none !important;
+  
+      td {
+        background: none !important;
+      }
+    }
+  }
+  
