@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/relations', require('./routes/api/relations'));
-// app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/stocks', require('./routes/api/stocks'));
+app.use('/api/catalogs', require('./routes/api/catalogs'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, message } from 'antd';
-import NewStock from './NewStock';
+import NewCatalog from './NewCatalog';
 import styles from './styles.module.scss';
 import swal from '@sweetalert/with-react';
 import { CustomButton, CustomTable } from '../../components';
 import { FiDelete } from 'react-icons/fi';
-import { useStocks } from '../../hooks';
+import { useCatalogs } from '../../hooks';
 
-export const Stocks = () => {
+export const Catalogs = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [stocks, setStocks] = useState([]);
-  const { getStocks, deleteStock } = useStocks();
+  const [catalogs, setCatalogs] = useState([]);
+  const { getCatalogs, deleteCatalog } = useCatalogs();
 
-  const getStocksAndUpdateState = () => {
-    getStocks()
+  const getCatalogsAndUpdateState = () => {
+    getCatalogs()
       .then(response => response.json())
-      .then(({ stocks }) => {
-        if (stocks) {
-          setStocks(stocks);
+      .then(({ catalogs }) => {
+        if (catalogs) {
+          setCatalogs(catalogs);
         }
       });
   };
@@ -34,11 +34,11 @@ export const Stocks = () => {
       dataIndex: 'name',
       align: 'left',
     },
-
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Type',
+      dataIndex: 'type',
       align: 'left',
+      render: value => <div>{value === 1 ? 'Product' : 'Service'}</div>,
     },
     {
       title: 'Description',
@@ -65,19 +65,19 @@ export const Stocks = () => {
             onClick={() => {
               swal({
                 title: 'Warning!',
-                text: 'Are you sure to delete this stock?',
+                text: 'Are you sure to delete this catalog?',
                 buttons: ['Cancel', 'Delete'],
                 dangerMode: true,
               }).then(willDelete => {
                 if (willDelete) {
-                  deleteStock(data)
+                  deleteCatalog(data)
                     .then(response => response.json())
                     .then(({ id }) => {
                       if (!id) {
                         return message.error('Error is happened');
                       }
-                      message.success('Stock is deleted');
-                      getStocksAndUpdateState();
+                      message.success('Catalog is deleted');
+                      getCatalogsAndUpdateState();
                     });
                 }
               });
@@ -89,17 +89,17 @@ export const Stocks = () => {
   ];
 
   useEffect(() => {
-    getStocksAndUpdateState();
+    getCatalogsAndUpdateState();
   }, []);
 
   return (
     <Layout.Content>
-      <NewStock
+      <NewCatalog
         isVisible={isVisible}
         setIsVisible={setIsVisible}
-        getStocksAndUpdateState={getStocksAndUpdateState}
+        getCatalogsAndUpdateState={getCatalogsAndUpdateState}
       />
-      <div className={styles.Stocks}>
+      <div className={styles.Catalogs}>
         <div
           style={{
             display: 'flex',
@@ -109,10 +109,14 @@ export const Stocks = () => {
           }}
         >
           <CustomButton type="primary" onClick={() => setIsVisible(true)}>
-            New Stock
+            New Catalogs
           </CustomButton>
         </div>
-        <CustomTable dataSource={stocks} columns={columns} pagination={false} />
+        <CustomTable
+          dataSource={catalogs}
+          columns={columns}
+          pagination={false}
+        />
       </div>
     </Layout.Content>
   );

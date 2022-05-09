@@ -2,60 +2,39 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 
-const Relation = require('../../models/Relation');
+const Stock = require('../../models/Stock');
 
-// @route    POST api/relations
-// @desc     Register relation
+// @route    POST api/stocks
+// @desc     Register stock
 // @access   Public
 router.post('/', auth, async (req, res) => {
-  const {
-    name,
-    type,
-    category,
-    company,
-    position,
-    iban,
-    description,
-    email,
-    website,
-    phoneNumber,
-    address,
-  } = req.body;
+  const { name, description, address } = req.body;
 
   try {
-
     if (!req.user) {
       return res.status(400).json({
         errors: [{ msg: 'Token is not valid' }],
       });
     }
-    let relation = await Relation.findOne({ name });
 
-    if (relation) {
+    let stock = await Stock.findOne({ name });
+
+    if (stock) {
       return res.status(400).json({
-        errors: [{ param: 'name', msg: 'Relation is already exists' }],
+        errors: [{ param: 'name', msg: 'Stock is already exists' }],
       });
     }
 
-    relation = new Relation({
+    stock = new Stock({
       user: req.user.id,
       name,
-      type,
-      category,
-      company,
-      position,
-      iban,
       description,
-      email,
-      website,
-      phoneNumber,
       address,
-      email,
     });
 
-    await relation.save();
+    await stock.save();
 
-    res.json({ id: relation.id });
+    res.json({ id: stock.id });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -64,7 +43,6 @@ router.post('/', auth, async (req, res) => {
 
 router.get('/', auth, async (req, res) => {
   try {
-    let relations = await Relation.find({ user: req.user.id });
 
     if (!req.user) {
       return res.status(400).json({
@@ -72,7 +50,10 @@ router.get('/', auth, async (req, res) => {
       });
     }
 
-    res.json({ relations });
+    let stocks = await Stock.find({ user: req.user.id });
+
+
+    res.json({ stocks });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
@@ -81,21 +62,19 @@ router.get('/', auth, async (req, res) => {
 
 router.delete('/:id', auth, async (req, res) => {
   try {
+    const stock = await Stock.findById(req.params.id);
 
-    const relation = await Relation.findById(req.params.id);
-
-    if (!relation) {
-      return res.status(404).json({ msg: 'Relation not found' });
+    if (!stock) {
+      return res.status(404).json({ msg: 'Stock not found' });
     }
 
-    if (relation.user.toString() !== req.user.id) {
+    if (stock.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: 'User not authorized' });
     }
 
-    await relation.remove();
+    await stock.remove();
 
-    res.json({ id: relation._id, msg: 'Relation removed' });
-
+    res.json({ id: stock._id, msg: 'Stock removed' });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');
