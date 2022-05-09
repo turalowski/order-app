@@ -12,6 +12,15 @@ export const Relations = () => {
   const [relations, setRelations] = useState([]);
   const { getRelations, deleteRelation } = useRelations();
 
+  const getRelationsAndUpdateState = () => {
+    getRelations()
+      .then(response => response.json())
+      .then(({ relations }) => {
+        if (relations) {
+          setRelations(relations);
+        }
+      });
+  };
   const columns = [
     {
       title: '№',
@@ -25,12 +34,36 @@ export const Relations = () => {
       dataIndex: 'name',
       align: 'left',
     },
+
     {
-      title: 'Relation type',
+      title: 'Type',
       dataIndex: 'type',
       align: 'left',
       width: 150,
       render: value => (value === 1 ? 'Legal Entity' : 'Company'),
+    },
+    {
+      title: 'Category',
+      dataIndex: 'category',
+      align: 'left',
+      width: 150,
+      render: values =>
+        values
+          .map(value => {
+            if (value === 1) {
+              return 'Seller';
+            }
+            if (value === 2) {
+              return 'Buyer';
+            }
+            return 'Manufacturer';
+          })
+          .join(', '),
+    },
+    {
+      title: 'Company',
+      dataIndex: 'company',
+      align: 'left',
     },
     {
       title: 'Email',
@@ -95,13 +128,7 @@ export const Relations = () => {
                         return message.error('Error is happened');
                       }
                       message.success('Relation is deleted');
-                      getRelations()
-                        .then(response => response.json())
-                        .then(({ relations }) => {
-                          if (relations) {
-                            setRelations(relations);
-                          }
-                        });
+                      getRelationsAndUpdateState();
                     });
                 }
               });
@@ -113,18 +140,16 @@ export const Relations = () => {
   ];
 
   useEffect(() => {
-    getRelations()
-      .then(response => response.json())
-      .then(({ relations }) => {
-        if (relations) {
-          setRelations(relations);
-        }
-      });
+    getRelationsAndUpdateState();
   }, []);
 
   return (
     <Layout.Content>
-      <NewRelation isVisible={isVisible} setIsVisible={setIsVisible} />
+      <NewRelation
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+        getRelationsAndUpdateState={getRelationsAndUpdateState}
+      />
       <div className={styles.Relations}>
         <div
           style={{

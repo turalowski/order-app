@@ -1,6 +1,11 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { NavLink } from 'react-router-dom';
+import {
+  NavLink,
+  useLocation,
+  useParams,
+  useResolvedPath,
+} from 'react-router-dom';
 import { ReactComponent as RelationsIcon } from '../../assets/icons/relations.svg';
 import { ReactComponent as StocksIcon } from '../../assets/icons/stocks.svg';
 import { ReactComponent as ProductsIcon } from '../../assets/icons/products.svg';
@@ -12,7 +17,7 @@ const menuItems = [
   {
     to: '/relations',
     icon: <RelationsIcon />,
-    label: 'relations',
+    label: 'Relations',
   },
   {
     to: '/stocks',
@@ -35,21 +40,28 @@ const menuItems = [
     label: 'Reports',
   },
 ];
+
 export const MainNavigation = () => {
+  const { pathname } = useLocation();
   return (
     <Layout.Sider theme="dark" width={80} className={styles.Sidebar}>
-      {menuItems.map(menuItem => (
-        <li className={styles.item}>
-          <NavLink
-            to={menuItem.to}
-            className={styles.link}
-            activeClassName={styles.active}
+      {menuItems.map(menuItem => {
+        console.log('path', pathname);
+        console.log('menuItem.to', menuItem.to);
+        console.log(pathname === menuItem.to ? true : false);
+        return (
+          <li
+            className={`${styles.item} ${
+              pathname === menuItem.to ? styles.item_active : null
+            }`}
           >
-            {menuItem.icon}
-            <span>{menuItem.label}</span>
-          </NavLink>
-        </li>
-      ))}
+            <NavLink to={menuItem.to} className={`${styles.link}`}>
+              {menuItem.icon}
+              <span>{menuItem.label}</span>
+            </NavLink>
+          </li>
+        );
+      })}
     </Layout.Sider>
   );
 };

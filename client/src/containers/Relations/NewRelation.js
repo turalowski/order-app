@@ -3,8 +3,8 @@ import { Modal, Form, Select, Input, message } from 'antd';
 import { CustomInput, CustomButton } from '../../components';
 import { useRelations } from '../../hooks';
 const NewRelation = props => {
-  const { isVisible, setIsVisible } = props;
-  const { getRelations, addRelation } = useRelations();
+  const { isVisible, setIsVisible, getRelationsAndUpdateState } = props;
+  const { addRelation } = useRelations();
   const [form] = Form.useForm();
 
   const onFinish = values => {
@@ -42,7 +42,7 @@ const NewRelation = props => {
           return message.error(msg);
         }
         message.success('Relation is saved');
-        getRelations();
+        getRelationsAndUpdateState();
         form.resetFields();
         setIsVisible(false);
       });
