@@ -40,7 +40,7 @@ export const Relations = () => {
       dataIndex: 'type',
       align: 'left',
       width: 150,
-      render: value => (value === 1 ? 'Legal Entity' : 'Company'),
+      render: value => (value === 1 ? 'Individual' : 'Company'),
     },
     {
       title: 'Category',

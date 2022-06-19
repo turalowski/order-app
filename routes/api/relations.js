@@ -29,7 +29,7 @@ router.post('/', auth, async (req, res) => {
         errors: [{ msg: 'Token is not valid' }],
       });
     }
-    let relation = await Relation.findOne({ name });
+    let relation = await Relation.findOne({ name, user: req.user.id });
 
     if (relation) {
       return res.status(400).json({

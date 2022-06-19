@@ -1,0 +1,10 @@
+.Trade {
+    margin: 20px;
+  
+    .deleteButton {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  

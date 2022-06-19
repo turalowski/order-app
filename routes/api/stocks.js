@@ -17,7 +17,7 @@ router.post('/', auth, async (req, res) => {
       });
     }
 
-    let stock = await Stock.findOne({ name });
+    let stock = await Stock.findOne({ name, user: req.user.id });
 
     if (stock) {
       return res.status(400).json({

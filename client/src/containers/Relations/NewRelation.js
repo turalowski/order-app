@@ -37,9 +37,13 @@ const NewRelation = props => {
     };
     addRelation(data)
       .then(response => response.json())
-      .then(({ msg }) => {
-        if (msg) {
-          return message.error(msg);
+      .then(({ errors }) => {
+        if(errors) {
+          let errorMessages = errors.map(({ param, msg }) => ({
+            name: param,
+            errors: [msg],
+          }));
+          return form.setFields(errorMessages);
         }
         message.success('Relation is saved');
         getRelationsAndUpdateState();
@@ -77,7 +81,7 @@ const NewRelation = props => {
             </Form.Item>
             <Form.Item label="Type" name="type" rules={[{ required: true }]}>
               <Select>
-                <Select.Option value={1}>Legal entity</Select.Option>
+                <Select.Option value={1}>Individual</Select.Option>
                 <Select.Option value={2}>Company</Select.Option>
               </Select>
             </Form.Item>
@@ -102,7 +106,7 @@ const NewRelation = props => {
             <Form.Item label="Position" name="position">
               <CustomInput />
             </Form.Item>
-            <Form.Item label="IBAN" name="iban">
+            <Form.Item label="Bank Account" name="iban">
               <CustomInput />
             </Form.Item>
           </div>

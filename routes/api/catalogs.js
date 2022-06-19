@@ -17,7 +17,7 @@ router.post('/', auth, async (req, res) => {
       });
     }
 
-    let catalog = await Catalog.findOne({ name });
+    let catalog = await Catalog.findOne({ name, user: req.user.id });
 
     if (catalog) {
       return res.status(400).json({

@@ -10,6 +10,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
+    font-size: 14px;
+    line-height: 14px;
+
+
 
     .user {
       display: flex;
@@ -17,7 +21,6 @@
       justify-content: center;
       flex-direction: column;
       margin-right: 10px;
-      line-height: 18px;
     }
   }
 }

@@ -44,7 +44,7 @@ export const MainHeader = () => {
 
       <div className={styles.userInfo}>
         <div className={styles.user}>
-          <span style={{ fontSize: '18px', marginBottom: '5px' }}>
+          <span style={{ fontSize: '14px', marginBottom: '5px' }}>
             {user?.fullName}
           </span>
           <span>{user?.companyName}</span>

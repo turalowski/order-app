@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Form, Select, Input, message } from 'antd';
 import { CustomInput, CustomButton } from '../../components';
+import Barcode from 'react-barcode';
 import { useProducts } from '../../hooks';
 const NewProduct = props => {
   const {
@@ -91,6 +92,7 @@ const NewProduct = props => {
         <Form.Item label="Barcode" name="barcode">
           <CustomInput />
         </Form.Item>
+        <Barcode value={form.getFieldValue('barcode')} />
         <Form.Item label="Description" name="description">
           <Input.TextArea />
         </Form.Item>

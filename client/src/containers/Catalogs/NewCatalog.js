@@ -17,9 +17,13 @@ const NewCatalog = props => {
     };
     addCatalog(data)
       .then(response => response.json())
-      .then(({ msg }) => {
-        if (msg) {
-          return message.error(msg);
+      .then(({ errors }) => {
+        if (errors) {
+          let errorMessages = errors.map(({ param, msg }) => ({
+            name: param,
+            errors: [msg],
+          }));
+          return form.setFields(errorMessages);
         }
         message.success('Catalog is saved');
         getCatalogsAndUpdateState();

@@ -4,3 +4,4 @@ export { Relations } from './Relations';
 export { Stocks } from './Stocks';
 export { Catalogs } from './Catalogs';
 export { Products } from './Products';
+export { Trade } from './Trade';
