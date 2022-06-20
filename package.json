@@ -7,9 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:server": "nodemon server.js",
     "start:client": "cd client && yarn start",
+    "setup:server": "yarn",
+    "setup:client": "cd client && yarn",
+    "setup:app": "concurrently \"yarn setup:server\" \"yarn setup:client\"",
     "start:app": "concurrently \"yarn start:server\" \"yarn start:client\"",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "author": "",
   "license": "ISC",
