@@ -11,7 +11,7 @@
     "setup:client": "cd client && yarn",
     "setup:app": "concurrently \"yarn setup:server\" \"yarn setup:client\"",
     "start:app": "concurrently \"yarn start:server\" \"yarn start:client\"",
-    "start": "node server.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
