@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RelationSchema = new mongoose.Schema({
+const Product = new mongoose.Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user'
@@ -10,37 +10,28 @@ const RelationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
+  catalog: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'catalog'
+  },
+  manufacturer: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'relation'
+  },
+  price: {
     type: Number,
     required: true,
   },
-  category: {
-    type: [Number],
-    required: true,
-  },
-  company: {
+  currency: {
     type: String,
     required: true,
-  },
-  position: {
-    type: String,
-  },
-  iban: {
-    type: String,
   },
   description: {
     type: String,
   },
-  email: {
-    type: String,
-  },
-  website: {
-    type: String,
-  },
-  phoneNumber: {
-    type: String,
-  },
-  address: {
+  barcode: {
     type: String,
   },
   createdAt: {
@@ -49,4 +40,4 @@ const RelationSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('relation', RelationSchema);
+module.exports = mongoose.model('product', Product);

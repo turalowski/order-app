@@ -60,56 +60,31 @@ export const Products = () => {
       align: 'left',
     },
     {
-      title: 'Type',
-      dataIndex: 'type',
+      title: 'Catalog',
+      dataIndex: 'catalog',
       align: 'left',
-      render: value => <div>{value === 1 ? 'Product' : 'Service'}</div>,
+      render: value => value.name,
+    },
+    {
+      title: 'Manufacturer',
+      dataIndex: 'manufacturer',
+      align: 'left',
+      render: value => value.name,
+    },
+    {
+      title: 'Price',
+      dataIndex: 'price',
+      align: 'left',
+      render: (value, item, key) => (
+        <span style={{ fontWeight: 700 }}>
+          {value} {item.currency}
+        </span>
+      ),
     },
     {
       title: 'Description',
       dataIndex: 'description',
       align: 'left',
-    },
-    {
-      title: 'Actions',
-      width: 100,
-      dataIndex: '_id',
-      align: 'center',
-      render: data => (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <FiDelete
-            size={20}
-            color="#f05545"
-            className={styles.deleteButton}
-            onClick={() => {
-              swal({
-                title: 'Warning!',
-                text: 'Are you sure to delete this product?',
-                buttons: ['Cancel', 'Delete'],
-                dangerMode: true,
-              }).then(willDelete => {
-                if (willDelete) {
-                  deleteProduct(data)
-                    .then(response => response.json())
-                    .then(({ id }) => {
-                      if (!id) {
-                        return message.error('Error is happened');
-                      }
-                      message.success('Product is deleted');
-                      getProductsAndUpdateState();
-                    });
-                }
-              });
-            }}
-          />
-        </div>
-      ),
     },
   ];
 

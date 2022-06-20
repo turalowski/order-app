@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Layout } from 'antd';
 import { CustomButton, CustomTable } from '../../components';
 import NewOperation from './NewOperation';
-import { useProducts, useRelations } from '../../hooks';
+import { useOperations, useProducts, useRelations } from '../../hooks';
 import styles from './styles.module.scss';
 
 export const Trade = () => {
@@ -15,6 +15,7 @@ export const Trade = () => {
 
   const { getProducts } = useProducts();
   const { getRelations } = useRelations();
+  const { getOperations } = useOperations();
 
   const columns = [
     {
@@ -26,32 +27,44 @@ export const Trade = () => {
     },
     {
       title: 'Operation Type',
-      dataIndex: 'name',
+      dataIndex: 'type',
       align: 'left',
+      render: value => (value === 1 ? 'Purchase' : 'Sales'),
     },
 
     {
       title: 'Operation date',
-      dataIndex: 'address',
+      dataIndex: 'createdAt',
       align: 'left',
+      render: value => {
+        const date = new Date(value);
+        return date.toDateString();
+      },
     },
     {
       title: 'Counterparty',
-      dataIndex: 'description',
+      dataIndex: 'counterparty',
       align: 'left',
+      render: value => value.name,
     },
     {
       title: 'Invoice number',
-      dataIndex: 'description',
+      dataIndex: 'invoice',
       align: 'left',
     },
     {
       title: 'Price',
-      dataIndex: 'description',
+      dataIndex: 'products',
       align: 'left',
+      render: value => {
+        const totalPrice = value.reduce(function (previousValue, currentValue) {
+          return previousValue + currentValue.price * currentValue.amount;
+        }, 0);
+        return <span style={{ fontWeight: 700 }}>{totalPrice} PLN</span>;
+      },
     },
     {
-      title: 'Sales manager',
+      title: 'Description',
       dataIndex: 'description',
       align: 'left',
     },
@@ -77,9 +90,20 @@ export const Trade = () => {
       });
   };
 
+  const getOperationsAndUpdateState = () => {
+    getOperations()
+      .then(response => response.json())
+      .then(({ operations }) => {
+        if (operations) {
+          setOperations(operations);
+        }
+      });
+  };
+
   useEffect(() => {
     getRelationsAndUpdateState();
     getProductsAndUpdateState();
+    getOperationsAndUpdateState();
   }, []);
   return (
     <Layout.Content>
@@ -88,7 +112,7 @@ export const Trade = () => {
         relations={relations}
         isVisible={newOperationModalIsVisible}
         setIsVisible={setNewOperationModalIsVisible}
-        // getStocksAndUpdateState={getStocksAndUpdateState}
+        getOperationsAndUpdateState={getOperationsAndUpdateState}
       />
       <div className={styles.Trade}>
         <div
