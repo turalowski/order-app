@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR
     subgraph Frontend components
     App.js([App.js]) --> UnAuthorized.js([UnAuthorized.js])
@@ -40,3 +41,5 @@ flowchart LR
         end
        
 end
+
+```
